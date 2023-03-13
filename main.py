@@ -5,16 +5,19 @@ from datetime import datetime
 
 from tokenAcquire import TokenAcquire
 
-CLIENT_ID = "da62d143aef14c0298819a8a697d25dd"
-CLIENT_SECRET = "e316cc09b276439f8a2a4c1d1800e02d"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
 AUTH_URL = 'https://accounts.spotify.com/api/token'
 BASE_URL = "https://api.spotify.com/v1/playlists/"
 
 USER_ID = "1134655235"
+PLAYLIST_ID="" # Official spotify playlist id
 
-PLAYLIST_ID="0Tc6YxlUkk4F5orWDDWWpM"
 def main():
     print("\n\n-_-_-_ Spotify Abuse Fix Kit _-_-_-\n\n")
+
+    name = input("Enter name of playlist: ")
+    description = input("Enter description of playlist: ")
 
     auth_response = requests.post(AUTH_URL, {
         'grant_type': 'client_credentials',
@@ -37,12 +40,12 @@ def main():
         
         try:
             if playlist_data.json()['name'] != "Depressive | Sad Metal":
-                print("[{0}]: - The cunt has arrived!".format(datetime.now().strftime("%H:%M:%S")))              
+                print("[{0}]: - The playlist has been falsely reported!".format(datetime.now().strftime("%H:%M:%S")))              
 
                 print("\t\t>>> Reverting playlist to original...")
                 data = json.dumps({
-                    "name": "Depressive | Sad Metal",
-                    "description": "Sad metal and depressive metal / rock that I love listening to when everything seems hopeless",
+                    "name": name,
+                    "description": description,
                     "public": True
                 })
 
